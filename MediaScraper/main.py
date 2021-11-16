@@ -34,7 +34,7 @@ def Scrape():
                     for href in href_list:
                         content.append(get_content(base, href))
 
-                with open("data.txt", 'a', encoding='utf-8') as f:
+                with open("ScrapeData.txt", 'a', encoding='utf-8') as f:
                     for c in content:
                         f.write(c.replace(" ", " "))
         base_index += 1

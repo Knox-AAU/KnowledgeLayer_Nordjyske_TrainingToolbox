@@ -18,12 +18,19 @@ topics_urls = [media_topics, it_topics, shipping_topics, finans_topics, med_topi
 page_num_url = "?pageNumber="
 
 
-def Scrape():
+def scrape(number_of_pages=1):
+    """
+    This function goes through all websites listen in base_url, and the respective topic list.
+    7 sites + 42 topics * 25 = 1225 articles per page
+
+    :param number_of_pages:
+    The number of pages to be looked through on each website
+    """
     base_index = 0
     for base in base_url:
         for topic in topics_urls[base_index]:
             print("Søger i: " + base + topic)
-            for i in range(1):
+            for i in range(int(number_of_pages)):
                 content = []
                 print("    Side: " + str(i+1))
                 href_list = get_hrefs(base + topic + page_num_url + str(i+1))
@@ -40,7 +47,17 @@ def Scrape():
         base_index += 1
 
 
-def get_content(base,href):
+def __get_content(base,href):
+    """
+    Gets the content of the website "base" + "href", which is the actual article
+
+    :param base:
+    Page
+    :param href:
+    Sub page
+    :return:
+    The header of the page with the sub_header and the content
+    """
     URL = base+href
     page = requests.get(URL)
     soup = BeautifulSoup(page.content.decode('utf-8'), "html.parser")
@@ -64,7 +81,15 @@ def get_content(base,href):
     return header + sub_header + content
 
 
-def get_hrefs(URL):
+def __get_hrefs(URL):
+    """
+    Extracts the paths to articles from the topic site
+
+    :param URL:
+    The url to extract hrefs from
+    :return:
+    A list of hrefs
+    """
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
     results = soup.find_all("a", class_="c-thumbnail c-thumbnail--gutter")
@@ -73,8 +98,3 @@ def get_hrefs(URL):
         href_list.append(element['href'])
 
     return href_list
-
-
-if __name__ == '__main__':
-    Scrape()
-

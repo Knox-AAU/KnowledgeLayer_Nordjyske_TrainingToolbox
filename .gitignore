@@ -137,3 +137,8 @@ dmypy.json
 /.idea/vcs.xml
 /.idea/inspectionProfiles/Project_Default.xml
 /AnnotateScrambler/autoAnnotated_scrambled.jsonl
+/autoAnnotated_scrambled.jsonl
+/converted.json
+/dev.json
+/ScrapeData.txt
+/train.json

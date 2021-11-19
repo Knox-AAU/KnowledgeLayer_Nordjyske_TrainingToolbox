@@ -5,7 +5,6 @@ Toolbox for creating training data for training spacy models.
 [Link to repo](https://github.com/Knox-AAU/KL_NJ_TrainingToolbox)
 
 > Remember to install the packages listed in the requirements file and the danish spacy model
-{.is-info}
 
 Install the danish spacy model with:
 ```
@@ -19,7 +18,6 @@ The tools include a scraper, auto annotater, line scrambler and some convertes.
 ### Scraper
 
 > The scraper may not work if watchmedier.dk have shut down or changed the structure of their websites.
-{.is-warning}
 
 The scraper was created to generate a lot of test/traning data fast. 
 The scraper scrapes the sub sites of [watchmedier.dk](watchmedier.dk) 

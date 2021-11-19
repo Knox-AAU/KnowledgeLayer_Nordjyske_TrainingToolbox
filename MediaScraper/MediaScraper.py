@@ -33,13 +33,13 @@ def scrape(number_of_pages=1):
             for i in range(int(number_of_pages)):
                 content = []
                 print("    Side: " + str(i+1))
-                href_list = get_hrefs(base + topic + page_num_url + str(i+1))
+                href_list = __get_hrefs(base + topic + page_num_url + str(i+1))
                 if len(href_list) == 0:
                     print("list is empty")
                     break
                 else:
                     for href in href_list:
-                        content.append(get_content(base, href))
+                        content.append(__get_content(base, href))
 
                 with open("ScrapeData.txt", 'a', encoding='utf-8') as f:
                     for c in content:

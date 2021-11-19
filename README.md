@@ -2,7 +2,6 @@
 Toolbox for creating training data for training spacy models.
 
 ## Traning toolboks
-[Link to repo](https://github.com/Knox-AAU/KL_NJ_TrainingToolbox)
 
 > Remember to install the packages listed in the requirements file and the danish spacy model
 

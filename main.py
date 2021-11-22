@@ -46,10 +46,10 @@ def split_data(path: str="autoAnnotated.jsonl", dest: str="./output", train_size
     data = open(path, encoding='utf8').readlines()
     train_len = int(len(data) * train_size)
 
-    with open(f'{dest}/train.jsonl', 'w') as f:
+    with open(f'{dest}/train.jsonl', 'w', encoding='utf-8') as f:
         f.writelines(data[:train_len])
 
-    with open(f'{dest}/dev.jsonl', 'w') as f:
+    with open(f'{dest}/dev.jsonl', 'w', encoding='utf-8') as f:
         f.writelines(data[train_len:])
 
 def convert_data(path="autoAnnotated_scrambled.jsonl", new_path="converted.json"):
@@ -176,17 +176,19 @@ if __name__ == '__main__':
         elif args[0] == "split":
             argument_dict = dict()
             options = ['--path', '--dest', '--train_size']
-            for _, arg in enumerate(args[1:]):
+            enumerator = enumerate(args[1:])
+            for _, arg in enumerator:
                 if arg in options:
-                    argument_dict[arg[2:]] = next(args)
+                    argument_dict[arg[2:]] = next(enumerator)[1]
             split_data(**argument_dict)
             #convert_data(args[1]) if len(args) == 2 else convert_data()
         elif args[0] == "train":
             argument_dict = dict()
             options = ['--model', '--dest', '--train', '--dev', '--config']
-            for _, arg in enumerate(args[1:]):
+            enumerator = enumerate(args[1:])
+            for _, arg in enumerator:
                 if arg in options:
-                    argument_dict[arg[2:]] = next(args)
+                    argument_dict[arg[2:]] = next(enumerator)[1]
             train_model(**argument_dict)
         elif args[0] == "visualise":
             argument_dict = defaultdict(str)

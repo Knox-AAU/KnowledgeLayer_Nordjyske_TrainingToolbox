@@ -2,22 +2,22 @@ import json
 
 import spacy
 from spacy.tokens import DocBin
-from spacy.cli.train import train
+from spacy.cli.train import train as spacy_train
 
 
-def train_model(base_model: str = "da_core_news_lg",
-                dataset_train_fp: str = "./output/train.jsonl",
-                dataset_dev_fp: str = "./output/dev.jsonl",
-                destination: str = "./output",
+def train_model(model: str = "da_core_news_lg",
+                train: str = "./output/train.jsonl",
+                dev: str = "./output/dev.jsonl",
+                dest: str = "./output",
                 config: str = "./Training/accuracy_config.cfg"):
-    train_destination = f'{destination}/train.spacy'
-    dev_destination = f'{destination}/dev.spacy'
+    train_destination = f'{dest}/train.spacy'
+    dev_destination = f'{dest}/dev.spacy'
     print("---Converting training set to spacy binary---")
-    __convert_to_spacy_binary(base_model, dataset_train_fp, train_destination)
+    __convert_to_spacy_binary(model, train, train_destination)
     print("---Converting dev set to spacy binary---")
-    __convert_to_spacy_binary(base_model, dataset_dev_fp, dev_destination)
+    __convert_to_spacy_binary(model, dev, dev_destination)
     print("---Training spacy model---")
-    train(config, destination, overrides={"paths.train": train_destination, "paths.dev": dev_destination})
+    spacy_train(config, dest, overrides={"paths.train": train_destination, "paths.dev": dev_destination})
 
 
 def __convert_to_spacy_binary(base_model: str, dataset_fp: str, destination: str):

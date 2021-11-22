@@ -59,10 +59,32 @@ python3 main.py scramble "file path(default="autoAnnotated.jsonl")"
 ```
 The scrambler outputs a file in josnl format called "autoAnnotated_scrambled.jsonl"
 
-### Converters
-The converter is used to convert data from a JSONL(doccano) format into a JSON(SpaCy) format and then seperate that data into two sets of data. One for the training and one for verification. It will be exactly 70\% training data and 30\% verification data. Additionally it strips annotations for white-spaces and corrects the label spans.
+### Splitter
+The command used to split the input dataset into a training and a dev dataset.
 
 You can run the converter by the following command:
 ```
-python3 main.py convert "file path(default="autoAnnotated_scrambled.jsonl") new file path(default=converted.json)"
+python3 main.py split [OPTIONS]
+```
+```
+[OPTIONS]:
+--path (default="autoAnnotated_scrambled.jsonl"): Filepath for the input jsonl
+--dest (default="converted.jsonl"): The destination folder of the splitted data
+--train_size (default=0.66): Size of the training data
+```
+
+### Training a custom model
+Based on the data provided by the converter, the toolbox can be used to train a custom SpaCy model.
+```
+python3 main.py train [OPTIONS]
+```
+The following options are available:
+```
+[OPTIONS]:
+--model (default=da_core_news_lg): The base model used in the training 
+    (NOT TO BE CONFUSED WITH THE MODEL PROVIDED IN THE CONFIG)
+--train (default=./output/train.jsonl): Filepath to the training data
+--dev (default=./output/dev.jsonl): Filepath to the dev data
+--dest (default=./output): The output destination of the trained model
+--config (default=./Training/accuracy_config.cfg): Filepath to the training configuation
 ```

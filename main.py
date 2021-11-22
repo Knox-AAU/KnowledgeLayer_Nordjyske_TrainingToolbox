@@ -1,12 +1,15 @@
 import json
+import os
 import random
 import sys
+from collections import defaultdict
+
 import spacy
-import os
 
 from MediaScraper.MediaScraper import scrape
 from AnnotateScrambler.AnoScrambler import scramble
-
+from Training.Training import train_model
+from Visualiser import visualize_model
 
 def auto_annotate(arg_data="ScrapeData.txt"):
     """
@@ -38,6 +41,16 @@ def auto_annotate(arg_data="ScrapeData.txt"):
                                 '", "label": ' + str(ent_list).replace("'", '"') + '}\n'))
                 line_id += 1
 
+
+def split_data(path: str="autoAnnotated.jsonl", dest: str="./output", train_size: int = 0.66):
+    data = open(path, encoding='utf8').readlines()
+    train_len = int(len(data) * train_size)
+
+    with open(f'{dest}/train.jsonl', 'w') as f:
+        f.writelines(data[:train_len])
+
+    with open(f'{dest}/dev.jsonl', 'w') as f:
+        f.writelines(data[train_len:])
 
 def convert_data(path="autoAnnotated_scrambled.jsonl", new_path="converted.json"):
     """
@@ -160,13 +173,24 @@ if __name__ == '__main__':
             auto_annotate(args[1]) if len(args) == 2 else auto_annotate()
         elif args[0] == "scramble":
             scramble(args[1]) if len(args) >= 2 else scramble()
-        elif args[0] == "convert":
-            convert_data(args[1]) if len(args) == 2 else convert_data()
-        # elif args[0] == "run":
-        #      arguments = enumerate(args)
-        #      for i, arg in arguments:
-        #             if arg == "--scape":
-        #                 __peek_next_argument(scrape, arguments, options, args, i)
-        #                 auto_annotate()
-        #             elif arg == "--scramble":
-        #                 __peek_next_argument(scramble, arguments, options, args, i)
+        elif args[0] == "split":
+            argument_dict = dict()
+            options = ['--path', '--dest', '--train_size']
+            for _, arg in enumerate(args[1:]):
+                if arg in options:
+                    argument_dict[arg[2:]] = next(args)
+            split_data(**argument_dict)
+            #convert_data(args[1]) if len(args) == 2 else convert_data()
+        elif args[0] == "train":
+            argument_dict = dict()
+            options = ['--model', '--dest', '--train', '--dev', '--config']
+            for _, arg in enumerate(args[1:]):
+                if arg in options:
+                    argument_dict[arg[2:]] = next(args)
+            train_model(**argument_dict)
+        elif args[0] == "visualise":
+            argument_dict = defaultdict(str)
+            options = ['--models']
+            if args[1] in options:
+                argument_dict[args[1][2:]] = ' '.join(args[2:])
+            os.system(f"streamlit run ./Visualiser/main.py {argument_dict['models']}")

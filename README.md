@@ -50,6 +50,7 @@ Run the annotator with:
 python3 main.py annotate [filePath]
 ```
 filePath defaults to "ScrapeData.txt" if not set.
+
 The annotator outputs a jsonl file to the root folder called "autoAnnotated.jsonl"
 
 ### Scrambler
@@ -61,6 +62,7 @@ Run the scrambler with:
 python3 main.py scramble [filePath]
 ```
 filePath defaults to "autoAnnotated.jsonl" if not set.
+
 The scrambler outputs a file in josnl format called "autoAnnotated_scrambled.jsonl"
 
 ### Splitter

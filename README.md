@@ -30,8 +30,10 @@ The scraper will per default scrape one page with 25 articles of each topic on a
 
 To run the scraper, run main.py with scrape as argument:
 ```
-python3 main.py scrape *number of page to scrape*(default=1)
+python3 main.py scrape [numberOfPages]
 ```
+
+numberOfPages defaults to 1 if not set. 
 
 The output of the scraper is a .txt file with line separated text. The file will be placed in the root folder with name "ScrapeData.txt"
 
@@ -45,8 +47,9 @@ After scraping, the auto annotator can be used on the scraped data to auto annot
 If not specified the annotator will use the output from the scraper.
 Run the annotator with:
 ```
-python3 main.py annotate "file path(default="ScrapeData.txt")"
+python3 main.py annotate [filePath]
 ```
+filePath defaults to "ScrapeData.txt" if not set.
 The annotator outputs a jsonl file to the root folder called "autoAnnotated.jsonl"
 
 ### Scrambler
@@ -55,8 +58,9 @@ The scrambler takes a file and scramble the lines in the files
 Per default the scrambler will use the output from the annotator called "autoAnnotated.jsonl"
 Run the scrambler with:
 ```
-python3 main.py scramble "file path(default="autoAnnotated.jsonl")"
+python3 main.py scramble [filePath]
 ```
+filePath defaults to "autoAnnotated.jsonl" if not set.
 The scrambler outputs a file in josnl format called "autoAnnotated_scrambled.jsonl"
 
 ### Splitter

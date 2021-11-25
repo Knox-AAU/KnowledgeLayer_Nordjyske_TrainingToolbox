@@ -38,3 +38,14 @@ def __convert_to_spacy_binary(base_model: str, dataset_fp: str, destination: str
                 print(f'Skipping: {data}. Message: {e}')
     db.to_disk(destination)
     return db
+
+
+def split_data(path: str="autoAnnotated.jsonl", dest: str="./output", train_size: int = 0.66):
+    data = open(path, encoding='utf8').readlines()
+    train_len = int(len(data) * train_size)
+
+    with open(f'{dest}/train.jsonl', 'w', encoding='utf-8') as f:
+        f.writelines(data[:train_len])
+
+    with open(f'{dest}/dev.jsonl', 'w', encoding='utf-8') as f:
+        f.writelines(data[train_len:])

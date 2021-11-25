@@ -27,7 +27,7 @@ mediawatch.dk, itwatch.dk, shippingwatch.dk, finanswatch.dk, medwatch.dk, energi
 Each site have between 5-8 topic sections, and each section have 25 articles.
 
 The scraper will per default scrape one page with 25 articles of each topic on all sites. In total:  
-1 as parameter \cdot (42 topics \cdot 25 articles) = 1050
+1 as parameter * (42 topics * 25 articles) = 1050
 
 To run the scraper, run main.py with scrape as argument:
 ```

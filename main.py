@@ -44,6 +44,6 @@ if __name__ == '__main__':
         elif args[0] == "visualise":
             argument_dict = defaultdict(str)
             options = ['--models']
-            if args[1] in options:
+            if len(args) > 1 and args[1] in options:
                 argument_dict[args[1][2:]] = ' '.join(args[2:])
             os.system(f"streamlit run ./Visualiser/main.py {argument_dict['models']}")

@@ -69,15 +69,15 @@ The scrambler outputs a file in josnl format called "autoAnnotated_scrambled.jso
 ### Splitter
 The command used to split the input dataset into a training and a dev dataset.
 
-You can run the converter by the following command:
+You can run the splitter by the following command:
 ```
 python3 main.py split [OPTIONS]
 ```
 ```
 [OPTIONS]:
---path (default="autoAnnotated_scrambled.jsonl"): Filepath for the input jsonl
---dest (default="converted.jsonl"): The destination folder of the splitted data
---train_size (default=0.66): Size of the training data
+--path (default="autoAnnotated.jsonl"): Filepath for the input jsonl
+--dest (default="./output"): The destination folder
+--train_size (default=0.66): Relative size of the training data
 ```
 
 ### Training a custom model

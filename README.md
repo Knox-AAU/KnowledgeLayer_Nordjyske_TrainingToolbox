@@ -92,6 +92,18 @@ The following options are available:
     (NOT TO BE CONFUSED WITH THE MODEL PROVIDED IN THE CONFIG)
 --train (default=./output/train.jsonl): Filepath to the training data
 --dev (default=./output/dev.jsonl): Filepath to the dev data
+--rules (default=None): Rules used for rule-based matching. If none are given, a matching step is not added.
 --dest (default=./output): The output destination of the trained model
 --config (default=./Training/accuracy_config.cfg): Filepath to the training configuation
+```
+
+### Visualising the model
+The model can be visualised using the following command:
+```
+python3 main.py visualise [OPTIONS]
+```
+The following options are available:
+```
+[OPTIONS]:
+--model (default=None): Additional models to visualise
 ```

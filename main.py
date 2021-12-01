@@ -35,7 +35,7 @@ if __name__ == '__main__':
             split_data(**argument_dict)
         elif args[0] == "train":
             argument_dict = dict()
-            options = ['--model', '--dest', '--train', '--dev', '--config']
+            options = ['--model', '--dest', '--train', '--dev', '--config', '--rules']
             enumerator = enumerate(args[1:])
             for _, arg in enumerator:
                 if arg in options:

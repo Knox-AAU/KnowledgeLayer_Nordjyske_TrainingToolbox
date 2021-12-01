@@ -142,3 +142,4 @@ dmypy.json
 /dev.json
 /ScrapeData.txt
 /train.json
+/output/

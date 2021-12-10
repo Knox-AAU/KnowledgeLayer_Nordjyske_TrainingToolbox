@@ -24,7 +24,7 @@ def train_model(model: str = "da_core_news_lg",
 
 
 def __add_entity_ruler(rules, dest):
-    nlp = spacy.load(f'{dest}/model-best')
+    nlp = spacy.load(f'{dest}/model-last')
     ruler = nlp.add_pipe('entity_ruler', config={"overwrite_ents": True})
     ruler.from_disk(rules)
     nlp.to_disk(f'{dest}/finalised-model')
@@ -57,3 +57,8 @@ def split_data(path: str="autoAnnotated.jsonl", dest: str="./output", train_size
         f.writelines(data[:train_len])
     with open(f'{dest}/dev.jsonl', 'w', encoding='utf-8') as f:
         f.writelines(data[train_len:])
+
+
+if __name__ == "__main__":
+    __add_entity_ruler("./rules/nj_rules.jsonl", "../output")
+    #__convert_to_spacy_binary("da_core_news_lg", "/home/dremacs/Desktop/kl_nj_test_data.jsonl", "/home/dremacs/Desktop/test.spacy")
